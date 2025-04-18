@@ -2,8 +2,8 @@
 // components/LoginButton.js
 
 import { auth, provider } from '../lib/firebase';
-import { signInWithPopup } from 'firebase/auth';
-import { useState } from 'react';
+import { signInWithPopup, onAuthStateChanged } from 'firebase/auth';
+import { useState, useEffect } from 'react';
 
 export default function LoginButton() {
   const [user, setUser] = useState(null);
@@ -16,6 +16,16 @@ export default function LoginButton() {
       console.error("Erro ao fazer login:", error);
     }
   };
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
