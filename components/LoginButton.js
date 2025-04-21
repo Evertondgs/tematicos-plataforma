@@ -1,9 +1,7 @@
-
 // components/LoginButton.js
-
+import { useEffect, useState } from 'react';
 import { auth, provider } from '../lib/firebase';
-import { signInWithPopup, onAuthStateChanged } from 'firebase/auth';
-import { useState, useEffect } from 'react';
+import { signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
 
 export default function LoginButton() {
   const [user, setUser] = useState(null);
@@ -17,11 +15,18 @@ export default function LoginButton() {
     }
   };
 
+  const logout = async () => {
+    try {
+      await signOut(auth);
+      setUser(null);
+    } catch (error) {
+      console.error("Erro ao sair:", error);
+    }
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
-      }
+      setUser(user);
     });
 
     return () => unsubscribe();
@@ -36,7 +41,13 @@ export default function LoginButton() {
       ) : (
         <div>
           <p>Olá, {user.displayName}!</p>
-          <img src={user.photoURL} alt="Avatar" style={{ width: 60, borderRadius: '50%' }} />
+          {user.photoURL && (
+            <img src={user.photoURL} alt="Avatar" style={{ width: 60, borderRadius: '50%' }} />
+          )}
+          <br />
+          <button onClick={logout} style={{ padding: '8px 16px', marginTop: '10px', backgroundColor: '#ccc', border: 'none', borderRadius: 6 }}>
+            Sair
+          </button>
         </div>
       )}
     </div>
