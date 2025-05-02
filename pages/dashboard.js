@@ -1,26 +1,19 @@
 // pages/dashboard.js
 import Head from 'next/head';
 import Link from 'next/link';
+import withAuth from '../components/withAuth';
+import Sidebar from '../components/Sidebar';
+import Layout from '../components/Layout';
 
 export default function Dashboard() {
   return (
-    <>
+    <Layout>
       <Head>
         <title>Dashboard | Temáticos for Business</title>
       </Head>
       <div className="flex h-screen bg-gray-100 font-sans">
         {/* Sidebar */}
-        <aside className="w-60 bg-[#002B56] text-white flex flex-col">
-          <div className="text-2xl font-bold text-center py-6 border-b border-white/10">TEMÁTICOS</div>
-          <nav className="flex-1 p-4 space-y-4 text-sm">
-            <Link href="/dashboard" className="block hover:text-pink-400 border-l-4 border-pink-500 pl-2 font-medium bg-white/10 rounded">
-              🏠 Dashboard
-            </Link>
-            <Link href="/trilhas/formacao-de-gestores" className="block hover:text-pink-400">🎯 Minhas Trilhas</Link>
-            <Link href="#" className="block hover:text-pink-400">📊 Progresso</Link>
-            <Link href="#" className="block hover:text-pink-400">🔍 Descobrir</Link>
-          </nav>
-        </aside>
+      
 
         {/* Main content */}
         <div className="flex-1 flex flex-col">
@@ -66,6 +59,6 @@ export default function Dashboard() {
           </main>
         </div>
       </div>
-    </>
+    </Layout>
   );
 }
