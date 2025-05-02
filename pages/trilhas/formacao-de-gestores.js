@@ -2,8 +2,9 @@
 import Head from 'next/head';
 import Header from '../../components/Header';
 import Link from 'next/link';
+import withAuth from '../../components/withAuth';
 
-export default function TrilhaFormacaoGestores() {
+function TrilhaFormacaoGestores() {
   return (
     <>
       <Head>
@@ -72,3 +73,5 @@ export default function TrilhaFormacaoGestores() {
     </>
   );
 }
+
+export default withAuth(TrilhaFormacaoGestores);

@@ -5,16 +5,13 @@ import withAuth from '../components/withAuth';
 import Sidebar from '../components/Sidebar';
 import Layout from '../components/Layout';
 
-export default function Dashboard() {
+function Dashboard() {
   return (
     <Layout>
       <Head>
         <title>Dashboard | Temáticos for Business</title>
       </Head>
       <div className="flex h-screen bg-gray-100 font-sans">
-        {/* Sidebar */}
-      
-
         {/* Main content */}
         <div className="flex-1 flex flex-col">
           {/* Header */}
@@ -62,3 +59,5 @@ export default function Dashboard() {
     </Layout>
   );
 }
+
+export default withAuth(Dashboard);
