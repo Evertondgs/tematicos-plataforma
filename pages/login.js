@@ -1,3 +1,4 @@
+// pages/login.js
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -46,9 +47,9 @@ export default function Login() {
       <Head>
         <title>Login | Temáticos</title>
       </Head>
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 to-slate-950 px-4">
-        <div className="w-full max-w-md bg-slate-900 text-white rounded-xl shadow-xl border border-white/10 p-8">
-          <h1 className="text-2xl font-bold mb-1 text-center">Bem-vindo à plataforma Temáticos</h1>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 to-slate-950 px-4 py-10">
+        <div className="w-full max-w-md bg-slate-900 text-white rounded-xl shadow-2xl border border-white/10 p-6 sm:p-8">
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2 text-center">Bem-vindo à plataforma Temáticos</h1>
           <p className="text-sm text-white/70 mb-6 text-center">Faça seu login e boa jornada!</p>
 
           <form className="space-y-4" onSubmit={handleLogin}>
@@ -71,7 +72,9 @@ export default function Login() {
               />
             </div>
             {erro && <p className="text-red-400 text-sm text-center">{erro}</p>}
-            <button type="submit" className="w-full py-2 rounded bg-green-400 text-slate-900 font-bold hover:bg-green-300 transition">ENTRAR</button>
+            <button type="submit" className="w-full py-2 rounded bg-green-400 text-slate-900 font-bold hover:bg-green-300 transition">
+              ENTRAR
+            </button>
             <button
               type="button"
               onClick={loginComGoogle}
@@ -81,8 +84,10 @@ export default function Login() {
             </button>
           </form>
 
-          <div className="text-xs text-white/70 mt-4 text-center">
-            <a href="/registrar" className="hover:underline">Primeiro acesso</a> / <a href="/esqueci-senha" className="hover:underline">Esqueci minha senha</a>
+          <div className="text-xs text-white/70 mt-6 text-center space-x-2">
+            <a href="/registrar" className="hover:underline">Primeiro acesso</a>
+            <span>/</span>
+            <a href="/esqueci-senha" className="hover:underline">Esqueci minha senha</a>
           </div>
         </div>
       </div>
