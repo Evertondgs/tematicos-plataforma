@@ -15,9 +15,13 @@ export default function Login() {
   const loginComGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
-      setUser(result.user);
+      const usuario = result.user;
+      setUser(usuario);
+      localStorage.setItem('userId', usuario.uid); // <- salva o UID
+      router.push('/dashboard');
     } catch (error) {
       console.error("Erro ao fazer login com Google:", error);
+      setErro("Erro ao entrar com Google.");
     }
   };
 
@@ -25,9 +29,13 @@ export default function Login() {
     e.preventDefault();
     setErro('');
     try {
-      await signInWithEmailAndPassword(auth, email, senha);
+      const credenciais = await signInWithEmailAndPassword(auth, email, senha);
+      const usuario = credenciais.user;
+      localStorage.setItem('userId', usuario.uid); // <- salva o UID
+      setUser(usuario);
       router.push('/dashboard');
     } catch (error) {
+      console.error("Erro ao entrar:", error);
       setErro('E-mail ou senha inválidos.');
     }
   };
@@ -36,6 +44,7 @@ export default function Login() {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
+        localStorage.setItem('userId', user.uid); // <- também garante persistência aqui
         router.push('/dashboard');
       }
     });
